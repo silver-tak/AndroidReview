@@ -1,6 +1,7 @@
 package com.silvertak.androidreview;
 
 public class Car {
+
     String company;
     String name;
     int price;
@@ -66,4 +67,5 @@ public class Car {
                 ", isHybrid=" + isHybrid +
                 '}';
     }
+
 }

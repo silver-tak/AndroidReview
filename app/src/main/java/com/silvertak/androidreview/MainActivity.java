@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +29,8 @@ import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.IntFunction;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 
@@ -122,10 +125,17 @@ public class MainActivity extends AppCompatActivity {
                 resultList.add(car);
                 resultList.sort((o1, o2) -> {
                     if(o1.getPrice() > o2.getPrice())
-                        return -1;
-                    else if(o1.getPrice() > o2.getPrice())
                         return 1;
-                    else return 0;
+                    else if(o1.getPrice() < o2.getPrice())
+                        return -1;
+                    else return 0;  // ==
+                });
+                Collections.sort(resultList, (car1, t1) -> {
+                    if(car1.getPrice() > t1.getPrice())
+                        return 1;
+                    else if(car1.getPrice() < t1.getPrice())
+                        return -1;
+                    else return 0;  // ==
                 });
             }
         }
@@ -193,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
                     .subscribeOn(Schedulers.newThread())
                     .subscribe(s -> {
                         //Thread.sleep(5000);
-                        Integer[] integers = (Integer[]) IntStream.range(0, 4999999).boxed().toArray(Integer[]::new);
+                        Integer[] integers = IntStream.range(0, 4999999).boxed().toArray(Integer[]::new);
                         Flowable
                                 .fromArray(integers)
                                 .subscribeOn(Schedulers.newThread())
@@ -250,73 +260,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    class Car {
 
-        String company;
-        String name;
-        int price;
-        double fuelEfficiency;
-        boolean isDisel;
-        boolean isGasoline;
-        boolean isLpg;
-        boolean isHybrid;
-
-        public Car(String company, String name, int price, double fuelEfficiency, boolean isDisel, boolean isGasoline, boolean isLpg, boolean isHybrid) {
-            this.company = company;
-            this.name = name;
-            this.price = price;
-            this.fuelEfficiency = fuelEfficiency;
-            this.isDisel = isDisel;
-            this.isGasoline = isGasoline;
-            this.isLpg = isLpg;
-            this.isHybrid = isHybrid;
-        }
-
-        public String getCompany() {
-            return company;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public int getPrice() {
-            return price;
-        }
-
-        public double getFuelEfficiency() {
-            return fuelEfficiency;
-        }
-
-        public boolean isDisel() {
-            return isDisel;
-        }
-
-        public boolean isGasoline() {
-            return isGasoline;
-        }
-
-        public boolean isLpg() {
-            return isLpg;
-        }
-
-        public boolean isHybrid() {
-            return isHybrid;
-        }
-
-        @Override
-        public String toString() {
-            return "Car{" +
-                    "company='" + company + '\'' +
-                    ", name='" + name + '\'' +
-                    ", price=" + price +
-                    ", fuelEfficiency=" + fuelEfficiency +
-                    ", isDisel=" + isDisel +
-                    ", isGasoline=" + isGasoline +
-                    ", isLpg=" + isLpg +
-                    ", isHybrid=" + isHybrid +
-                    '}';
-        }
-
-    }
 }
