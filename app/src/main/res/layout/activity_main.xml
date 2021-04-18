@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/middleLine"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:text="Hello World!"
+        android:gravity="center"
+        android:textSize="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@id/middleLine"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/loadingIv"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loadingIv"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        app:lottie_fileName="cat.json"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@id/middleLine"
+        app:layout_constraintTop_toBottomOf="@id/tv"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="나우티앤에스"
+        app:layout_constraintLeft_toLeftOf="@+id/middleLine"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/changeColorBtn"/>
+
+    <Button
+        android:id="@+id/changeColorBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="색변경"
+        app:layout_constraintLeft_toLeftOf="@+id/middleLine"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn"
+        app:layout_constraintBottom_toTopOf="@id/changeSizeBtn"/>
+
+    <Button
+        android:id="@+id/changeSizeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="크기변경"
+        app:layout_constraintLeft_toLeftOf="@+id/middleLine"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/changeColorBtn"
+        app:layout_constraintBottom_toTopOf="@id/syncThreadSleep"/>
+
+    <Button
+        android:id="@+id/syncThreadSleep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SYNC Thread sleep"
+        app:layout_constraintLeft_toLeftOf="@+id/middleLine"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/changeSizeBtn"
+        app:layout_constraintBottom_toTopOf="@id/asyncThreadSleep"/>
+
+    <Button
+        android:id="@+id/asyncThreadSleep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ASYNC Thread sleep"
+        app:layout_constraintLeft_toLeftOf="@+id/middleLine"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/syncThreadSleep"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
